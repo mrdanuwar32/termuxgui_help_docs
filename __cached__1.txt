@@ -1,0 +1,4 @@
+No Python documentation found for '/data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/__pycache__/__init__.cpython-312.pyc'.
+Use help() to get the interactive help utility.
+Use help(str) for help on the str class.
+

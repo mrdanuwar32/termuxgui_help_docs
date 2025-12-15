@@ -1,0 +1,3497 @@
+Help on package termuxgui:
+
+NAME
+    termuxgui - This is a library for interacting with the Termux:GUI plugin from python.
+
+DESCRIPTION
+    You don't need to include all the submodules, all needed classes are automatically included in the package scope upon
+    importing the package.
+
+PACKAGE CONTENTS
+    activity
+    buffer
+    button
+    checkbox
+    compoundbutton
+    connection
+    edittext
+    event
+    framelayout
+    gridlayout
+    horizontalscrollview
+    imageview
+    linearlayout
+    msg
+    nestedscrollview
+    notification
+    oo (package)
+    progressbar
+    radiobutton
+    radiogroup
+    remoteviews
+    space
+    spinner
+    swiperefreshlayout
+    switch
+    tablayout
+    task
+    textview
+    togglebutton
+    view
+    viewgroup
+    webview
+
+CLASSES
+    builtins.object
+        termuxgui.activity.Activity
+        termuxgui.buffer.Buffer
+        termuxgui.connection.Connection
+        termuxgui.event.Event
+        termuxgui.notification.Notification
+        termuxgui.remoteviews.RemoteViews
+        termuxgui.task.Task
+        termuxgui.view.View
+            termuxgui.imageview.ImageView
+            termuxgui.progressbar.ProgressBar
+            termuxgui.space.Space
+            termuxgui.spinner.Spinner
+            termuxgui.textview.TextView
+                termuxgui.button.Button
+                    termuxgui.compoundbutton.CompoundButton
+                        termuxgui.checkbox.Checkbox
+                        termuxgui.radiobutton.RadioButton
+                        termuxgui.switch.Switch
+                        termuxgui.togglebutton.ToggleButton
+                termuxgui.edittext.EditText
+            termuxgui.viewgroup.ViewGroup
+                termuxgui.framelayout.FrameLayout
+                    termuxgui.horizontalscrollview.HorizontalScrollView
+                        termuxgui.tablayout.TabLayout
+                    termuxgui.nestedscrollview.NestedScrollView
+                termuxgui.gridlayout.GridLayout
+                termuxgui.linearlayout.LinearLayout
+                    termuxgui.radiogroup.RadioGroup
+                termuxgui.swiperefreshlayout.SwipeRefreshLayout
+            termuxgui.webview.WebView
+
+    class Activity(builtins.object)
+     |  Activity(connection: termuxgui.connection.Connection, tid: Optional[str] = None, dialog: Optional[bool] = None, pip: Optional[bool] = False, overlay: Optional[bool] = None, lockscreen: Optional[bool] = None, canceloutside: bool = True, intercept: bool = False)
+     |
+     |  This represents an Android Activity.
+     |
+     |  Use a.c to access the Connection object of an Activity and a.t to access the Task object.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, connection: termuxgui.connection.Connection, tid: Optional[str] = None, dialog: Optional[bool] = None, pip: Optional[bool] = False, overlay: Optional[bool] = None, lockscreen: Optional[bool] = None, canceloutside: bool = True, intercept: bool = False)
+     |      When an Activity could not be created, a RuntimeError is raised.
+     |
+     |  finish(self)
+     |      Finishes an Activity.
+     |
+     |  getconfiguration(self) -> termuxgui.connection.Configuration
+     |      Reads the current configuration of this Activity.
+     |
+     |  hidesoftkeyboard(self)
+     |      Hides the soft keyboard if this Activity has the soft keyboard focus.
+     |
+     |  interceptbackbutton(self, intercept: bool)
+     |      Sets whether to intercept a back button press and send an event instead.
+     |
+     |  keepscreenon(self, on: bool)
+     |      Sets whether the Activity should keep the screen on while it is showing.
+     |
+     |  movetoback(self)
+     |      Moves this Activity's Task to the recents screen and hides it.
+     |
+     |  requestunlock(self)
+     |      Requests the lockscreen to unlock.
+     |      If the lockscreen is just protected by a swipe, it is unlocked immediately.
+     |      If a PIN, password or pattern has to be used, brings up the UI to let the user unlock the lockscreen.
+     |
+     |  sendoverlayevents(self, send: bool)
+     |      Sets whether or not you want to receive overlay events if the Activity is an overlay.
+     |
+     |  setinputmode(self, mode: Literal['resize', 'pan'])
+     |      Sets the input mode for an Activity.
+     |
+     |  setorientation(self, orientation: Literal['behind', 'fullSensor', 'fullUser', 'landscape', 'locked', 'nosensor', 'portrait', 'reverseLandscape', 'reversePortrait', 'sensorLandscape', 'sensorPortrait', 'user', 'userLandscape', 'userPortrait'])
+     |      Sets the preferred orientation of the Activity.
+     |
+     |  setpipmode(self, pip: bool)
+     |      Goes into / out of picture-in-picture mode.
+     |
+     |      When you exit pip, you Activity is put in the recent tasks list and not shown to the user.
+     |
+     |  setpipmodeauto(self, pip: bool)
+     |      Set whether the Activity should automatically enter picture-in-picture mode
+     |      when the user leaves the Activity.
+     |
+     |  setpipparams(self, num: int, den: int)
+     |      Sets the PiP parameters for the Activity, currently only the aspect ration.
+     |
+     |  setposition(self, x: int, y: int)
+     |      Sets the screen position of the Activity if it is an overlay.
+     |
+     |  setsecure(self, secure: bool)
+     |      Sets the secure flag for the Activity, making screenshots impossible and showing a blank screen in the
+     |      task switcher.
+     |
+     |  settaskdescription(self, label: str, img: str)
+     |      Sets the Task icon. img has to be a PNG or JPEG image as a base64 encoded string.
+     |
+     |  settheme(self, statusbarcolor: int, colorprimary: int, windowbackground: int, textcolor: int, coloraccent: int)
+     |      Sets the Theme for the Activity.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+    class Buffer(builtins.object)
+     |  Buffer(connection, w: int, h: int, format: Literal['ARGB888'] = 'ARGB888')
+     |
+     |  This represents a raw ARGB888 image buffer.
+     |
+     |  This is only available on Android 8.1+.
+     |  Buffers consume much memory, so be sure to close any Buffer you don't need any more.
+     |  Preferably use "with" to get the memory object of the buffer so it is automatically closed.
+     |  The memory object is a shared memory object that can be used like a bytes object or a file object.
+     |  You can also directly access the memory object as b.mem.
+     |
+     |  A RuntimeError is raised when a Buffer can't be created.
+     |
+     |  Methods defined here:
+     |
+     |  __enter__(self)
+     |
+     |  __exit__(self, type, value, traceback)
+     |
+     |  __init__(self, connection, w: int, h: int, format: Literal['ARGB888'] = 'ARGB888')
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  blit(self)
+     |      Blits the buffer to the underlying image in the plugin.
+     |      To update ImageViews using this buffer, they have to be refreshed afterwards.
+     |
+     |  remove(self)
+     |      Removes this buffer, freeing the memory.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+    class Button(termuxgui.textview.TextView)
+     |  Button(activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, allcaps: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a Button.
+     |
+     |  Method resolution order:
+     |      Button
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, allcaps: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Checkbox(termuxgui.compoundbutton.CompoundButton)
+     |  Checkbox(activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a CheckBox.
+     |
+     |  Method resolution order:
+     |      Checkbox
+     |      termuxgui.compoundbutton.CompoundButton
+     |      termuxgui.button.Button
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.compoundbutton.CompoundButton:
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Use this to let the CompoundButton track whether it is checked or not. Just pass every Event here.
+     |
+     |  setchecked(self, checked: bool)
+     |      Explicitly set the checked status of this CompoundButton.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class CompoundButton(termuxgui.button.Button)
+     |  CompoundButton(activity: termuxgui.activity.Activity, id: int)
+     |
+     |  This represents a CompoundButton.
+     |
+     |  This class doesn't correspond to a particular View, it is used to provide common methods for all CompoundButtons.
+     |
+     |  Method resolution order:
+     |      CompoundButton
+     |      termuxgui.button.Button
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, id: int)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Use this to let the CompoundButton track whether it is checked or not. Just pass every Event here.
+     |
+     |  setchecked(self, checked: bool)
+     |      Explicitly set the checked status of this CompoundButton.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Connection(builtins.object)
+     |  This represents a connection to the Termux:GUI plugin and contains all functions that don't act on any
+     |  particular View, Activity or Task.
+     |
+     |  Methods defined here:
+     |
+     |  __enter__(self)
+     |
+     |  __exit__(self, type, value, traceback)
+     |
+     |  __init__(self)
+     |      When a connection can't be established, a RuntimeError is raised.
+     |
+     |  checkevent(self) -> Optional[termuxgui.event.Event]
+     |      If there is at least one event to be read, returns it.
+     |      If there is no event, returns None.
+     |      You can use this to e.g. check for events between drawing a frame instead of
+     |      having to use a separate thread and blocking it.
+     |
+     |  close(self)
+     |      Closes the connection.
+     |
+     |      The connection is automatically closed when the program exits, but it's good practice to close the connection
+     |      yourself when you don't need it anymore or use a "with" statement.
+     |
+     |  events(self) -> Iterator[termuxgui.event.Event]
+     |      Waits for events. Use this with "for in" to iterate over incoming events and block while waiting.
+     |
+     |  getversion(self) -> bool
+     |      Returns the version code of the plugin app.
+     |      Can be used to disable features only present in a newer version or prompting the user to update.
+     |
+     |  islocked(self) -> bool
+     |      Returns whether the device is locked.
+     |
+     |  send_msg(self, msg: Union[str, dict])
+     |      Send a message to the main socket.
+     |      You should only need to call this yourself if you want to use methods not yet implemented in the library.
+     |
+     |  send_read_msg(self, msg: Union[str, dict])
+     |      Send a message to the main socket and read a message afterwards.
+     |      You should only need to call this yourself if you want to use methods not yet implemented in the library.
+     |
+     |  toast(self, text: str, long: bool = False)
+     |      Sends a Toast. Set long to True if you want to display the text for longer.
+     |
+     |  totermux(self)
+     |      Returns to the termux task. This is a shorthand for running "am start" to start the termux activity.
+     |
+     |  turnscreenon(self)
+     |      Turns the screen on.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+    class EditText(termuxgui.textview.TextView)
+     |  EditText(activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, singleline: bool = False, line: bool = True, blockinput: bool = False, inputtype: Literal['text', 'textMultiLine', 'phone', 'date', 'time', 'datetime', 'number', 'numberDecimal', 'numberPassword', 'numberSigned', 'numberDecimalSigned', 'textEmailAddress', 'textPassword'] = 'text', visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents an EditText.
+     |
+     |  Method resolution order:
+     |      EditText
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, singleline: bool = False, line: bool = True, blockinput: bool = False, inputtype: Literal['text', 'textMultiLine', 'phone', 'date', 'time', 'datetime', 'number', 'numberDecimal', 'numberPassword', 'numberSigned', 'numberDecimalSigned', 'textEmailAddress', 'textPassword'] = 'text', visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  showcursor(self, show: bool)
+     |      Sets whether the cursor position should be shown.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Event(builtins.object)
+     |  Event(ev: dict)
+     |
+     |  This represents an Event in the GUI.
+     |
+     |  The class variables are the available event types.
+     |
+     |  Use ev.type == Event.eventtype to check for event types.
+     |
+     |  ev.type contains the event type and ev.value is a dictionary containing the values of the event, if any.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, ev: dict)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  airplane = 'airplane'
+     |
+     |  back = 'back'
+     |
+     |  click = 'click'
+     |
+     |  config = 'config'
+     |
+     |  create = 'create'
+     |
+     |  destroy = 'destroy'
+     |
+     |  focusChange = 'focusChange'
+     |
+     |  itemselected = 'itemselected'
+     |
+     |  key = 'key'
+     |
+     |  locale = 'locale'
+     |
+     |  longClick = 'longClick'
+     |
+     |  notification = 'notification'
+     |
+     |  notificationDismissed = 'notificationDismissed'
+     |
+     |  notificationaction = 'notificationaction'
+     |
+     |  overlayScale = 'overlayScale'
+     |
+     |  overlaytouch = 'overlayTouch'
+     |
+     |  pause = 'pause'
+     |
+     |  pipchanged = 'pipchanged'
+     |
+     |  refresh = 'refresh'
+     |
+     |  remoteclick = 'remoteclick'
+     |
+     |  resume = 'resume'
+     |
+     |  screen_off = 'screen_off'
+     |
+     |  screenon = 'screen_on'
+     |
+     |  selected = 'selected'
+     |
+     |  start = 'start'
+     |
+     |  stop = 'stop'
+     |
+     |  text = 'text'
+     |
+     |  timezone = 'timezone'
+     |
+     |  touch = 'touch'
+     |
+     |  touch_cancel = 'cancel'
+     |
+     |  touch_down = 'down'
+     |
+     |  touch_move = 'move'
+     |
+     |  touch_pointer_down = 'pointer_down'
+     |
+     |  touch_pointer_up = 'pointer_up'
+     |
+     |  touch_up = 'up'
+     |
+     |  userleavehint = 'UserLeaveHint'
+     |
+     |  webviewConsoleMessage = 'webviewConsoleMessage'
+     |
+     |  webviewDestroyed = 'webviewDestroyed'
+     |
+     |  webviewError = 'webviewError'
+     |
+     |  webviewHTTPError = 'webviewHTTPError'
+     |
+     |  webviewNavigation = 'webviewNavigation'
+     |
+     |  webviewProgress = 'webviewProgress'
+
+    class FrameLayout(termuxgui.viewgroup.ViewGroup)
+     |  FrameLayout(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a FrameLayout.
+     |
+     |  Method resolution order:
+     |      FrameLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class GridLayout(termuxgui.viewgroup.ViewGroup)
+     |  GridLayout(activity: termuxgui.activity.Activity, rows: int, cols: int, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a GridLayout.
+     |
+     |  Method resolution order:
+     |      GridLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, rows: int, cols: int, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class HorizontalScrollView(termuxgui.framelayout.FrameLayout)
+     |  HorizontalScrollView(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, fillviewport: bool = False, snapping: bool = False, nobar: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a HorizontalScrollView.
+     |
+     |  Method resolution order:
+     |      HorizontalScrollView
+     |      termuxgui.framelayout.FrameLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, fillviewport: bool = False, snapping: bool = False, nobar: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  getscrollposition(self) -> List[int]
+     |      Gets the x and x scroll positions.
+     |
+     |  setscrollposition(self, x: int, y: int, smooth: bool = True)
+     |      Sets the x and x scroll positions. smooth specifies whether is's a smooth scoll or not.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class ImageView(termuxgui.view.View)
+     |  ImageView(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents an ImageView.
+     |
+     |  Method resolution order:
+     |      ImageView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  refresh(self)
+     |      Redraws the ImageView. You have to use this after blitting the Buffer when using a buffer.
+     |
+     |  setbuffer(self, b: termuxgui.buffer.Buffer)
+     |      Makes the ImageView use a shared buffer as the image source.
+     |
+     |  setimage(self, img: bytes)
+     |      Sets the image of the ImageView.
+     |      The image has to be a bytes object containing the image in png or jpeg format.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class LinearLayout(termuxgui.viewgroup.ViewGroup)
+     |  LinearLayout(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, vertical: bool = True, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a LinearLayout.
+     |
+     |  Method resolution order:
+     |      LinearLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, vertical: bool = True, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class NestedScrollView(termuxgui.framelayout.FrameLayout)
+     |  NestedScrollView(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, fillviewport: bool = False, snapping: bool = False, nobar: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a NestedScrollView.
+     |
+     |  Method resolution order:
+     |      NestedScrollView
+     |      termuxgui.framelayout.FrameLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, fillviewport: bool = False, snapping: bool = False, nobar: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  getscrollposition(self) -> List[int]
+     |      Gets the x and x scroll positions.
+     |
+     |  setscrollposition(self, x: int, y: int, smooth: bool = True)
+     |      Sets the x and x scroll positions. smooth specifies whether it's a smooth scroll or not.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Notification(builtins.object)
+     |  Notification(connection: termuxgui.connection.Connection, channel: str, importance: Literal[0, 1, 2, 3, 4])
+     |
+     |  This represents a notification.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, connection: termuxgui.connection.Connection, channel: str, importance: Literal[0, 1, 2, 3, 4])
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  cancel(self)
+     |      Cancels the notification.
+     |
+     |  createchannel(self)
+     |      Creates the notification channel for the notification. This is called automatically when you call notify.
+     |
+     |  notify(self)
+     |      Creates/updates the notification.
+     |
+     |  setactions(self, actions: List[str])
+     |      Sets the displayed actions for the notification.
+     |
+     |  setalertonce(self, alertonce: bool)
+     |      If you call notify more than once, whether to alert the user every time.
+     |
+     |  setcontent(self, content: str)
+     |      Sets the content of the notification, removing any set custom layout.
+     |
+     |  setexpandedlayout(self, layout: termuxgui.remoteviews.RemoteViews)
+     |      Sets a custom expanded layout for the notification.
+     |      Removes any title, content largetext or largeimage.
+     |
+     |  sethudlayout(self, layout: termuxgui.remoteviews.RemoteViews)
+     |      Sets a custom hud layout for the notification.
+     |      Removes any title, content largetext or largeimage.
+     |
+     |  seticon(self, icon: bytes)
+     |      Set the icon of the notification.
+     |      icon has to be a bytes object containing the icon in png or jpeg format.
+     |
+     |  setlargeimage(self, img: bytes)
+     |      Sets a large image for the notification, removing any set custom layout.
+     |
+     |  setlargeimageasthumbnail(self, asthumbnail: bool)
+     |      Sets whether to show a large image as a thumbnail in the collapsed notification.
+     |
+     |  setlargetext(self, text: str)
+     |      Sets the text after expanding the notification, removing any set custom layout.
+     |
+     |  setlayout(self, layout: termuxgui.remoteviews.RemoteViews)
+     |      Sets a custom layout for the notification.
+     |      Removes any title, content largetext or largeimage.
+     |
+     |  setongoing(self, ongoing: bool)
+     |      Ongoing notifications can't be dismissed by the user.
+     |
+     |  setshowtimestamp(self, show: bool)
+     |      Whether the timestamp is shown in the notification
+     |
+     |  settimestamp(self, timestamp: int)
+     |      Sets the timestamp of the notification. The format is the unix time in milliseconds.
+     |
+     |  settitle(self, title: str)
+     |      Sets the title of the notification, removing any set custom layout.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+    class ProgressBar(termuxgui.view.View)
+     |  ProgressBar(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a ProgressBar.
+     |
+     |  Method resolution order:
+     |      ProgressBar
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  setprogress(self, progress: int)
+     |      Sets the progress of the ProgressBar. The progress has to be an integer from 0 to 100 (inclusive).
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class RadioButton(termuxgui.compoundbutton.CompoundButton)
+     |  RadioButton(activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a RadioButton.
+     |
+     |  Method resolution order:
+     |      RadioButton
+     |      termuxgui.compoundbutton.CompoundButton
+     |      termuxgui.button.Button
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.compoundbutton.CompoundButton:
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Use this to let the CompoundButton track whether it is checked or not. Just pass every Event here.
+     |
+     |  setchecked(self, checked: bool)
+     |      Explicitly set the checked status of this CompoundButton.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class RadioGroup(termuxgui.linearlayout.LinearLayout)
+     |  RadioGroup(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a RadioGroup.
+     |
+     |  Only one RadioButton inside a RadioGroup can be checked at once, and the RadioGroup emits events when the checked button has changed.
+     |
+     |  Method resolution order:
+     |      RadioGroup
+     |      termuxgui.linearlayout.LinearLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class RemoteViews(builtins.object)
+     |  RemoteViews(connection: termuxgui.connection.Connection)
+     |
+     |  This represents a remote Layout. You can use remote Layouts for custom notifications or widgets.
+     |
+     |  Methods defined here:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  __init__(self, connection: termuxgui.connection.Connection)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  addButton(self, parent: Optional[int] = None) -> int
+     |      Creates a Button in this remote Layout and returns the id, or -1 if it could not be created.
+     |      The id can be used in further methods to manipulate the View.
+     |
+     |  addFrameLayout(self, parent: Optional[int] = None) -> int
+     |      Creates a FrameLayout in this remote Layout and returns the id, or -1 if it could not be created.
+     |      The id can be used in further methods to manipulate the View.
+     |
+     |  addImageView(self, parent: Optional[int] = None) -> int
+     |      Creates an ImageView in this remote Layout and returns the id, or -1 if it could not be created.
+     |      The id can be used in further methods to manipulate the View.
+     |
+     |  addLinearLayout(self, parent: Optional[int] = None, vertical: Optional[bool] = None) -> int
+     |      Creates a LinearLayout in this remote Layout and returns the id, or -1 if it could not be created.
+     |      The id can be used in further methods to manipulate the View.
+     |
+     |  addProgressBar(self, parent: Optional[int] = None) -> int
+     |      Creates a ProgressBar in this remote Layout and returns the id, or -1 if it could not be created.
+     |      The id can be used in further methods to manipulate the View.
+     |
+     |  addTextView(self, parent: Optional[int] = None) -> int
+     |      Creates a TextView in this remote Layout and returns the id, or -1 if it could not be created.
+     |      The id can be used in further methods to manipulate the View.
+     |
+     |  delete(self)
+     |      Deletes this remote Layout.
+     |
+     |  setBackgroundColor(self, id: int, color: int)
+     |      Sets the background color of a View in this remote Layout.
+     |
+     |  setImage(self, id: int, img: Union[str, bytes])
+     |      Sets the image of an ImageView in this remote Layout.
+     |      The image has to be a bytes object containing the image in png or jpeg format,
+     |      or a string containing the base64 encoded version of it.
+     |
+     |  setPadding(self, id: int, left: int, top: int, right: int, bottom: int)
+     |      Sets the padding of a View in this remote Layout.
+     |
+     |  setProgress(self, id: int, progress: int, max: int)
+     |      Sets the progress and maximum value of a ProgressBar in this remote Layout.
+     |
+     |  setText(self, id: int, text: str)
+     |      Sets the text of a TextView in this remote Layout.
+     |
+     |  setTextColor(self, id: int, color: int)
+     |      Sets the text color of a TextView in this remote Layout.
+     |
+     |  setTextSize(self, id: int, size: int, px: bool)
+     |      Sets the text size of a TextView in this remote Layout.
+     |      If px is true, the size will be in pixels. If not, it will be in dip.
+     |
+     |  setVisibility(self, id: int, vis: Literal[0, 1, 2])
+     |      Sets the visibility of a View in this remote Layout.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  updateWidget(self, wid: str)
+     |      Sets the content of the Widget with ID wid to this remote Layout.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __hash__ = None
+
+    class Space(termuxgui.view.View)
+     |  Space(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a Space. You can use this to create empty space in your layout.
+     |
+     |  Method resolution order:
+     |      Space
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Spinner(termuxgui.view.View)
+     |  Spinner(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a Spinner.
+     |
+     |  Method resolution order:
+     |      Spinner
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  selectitem(self, item: int)
+     |      Sets the selected item of the Spinner.
+     |
+     |  setlist(self, list: List[str])
+     |      Sets the list of items displayed in the Spinner.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class SwipeRefreshLayout(termuxgui.viewgroup.ViewGroup)
+     |  SwipeRefreshLayout(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a SwipeRefreshLayout.
+     |
+     |  Method resolution order:
+     |      SwipeRefreshLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  setrefreshing(self, refreshing: bool)
+     |      Sets whether the SwipeRefreshLayout displays the refresh animation.
+     |
+     |      You have to call this with False when you refreshed the contents.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Switch(termuxgui.compoundbutton.CompoundButton)
+     |  Switch(activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a Switch.
+     |
+     |  Method resolution order:
+     |      Switch
+     |      termuxgui.compoundbutton.CompoundButton
+     |      termuxgui.button.Button
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.compoundbutton.CompoundButton:
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Use this to let the CompoundButton track whether it is checked or not. Just pass every Event here.
+     |
+     |  setchecked(self, checked: bool)
+     |      Explicitly set the checked status of this CompoundButton.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class TabLayout(termuxgui.horizontalscrollview.HorizontalScrollView)
+     |  TabLayout(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a TabLayout.
+     |
+     |  Method resolution order:
+     |      TabLayout
+     |      termuxgui.horizontalscrollview.HorizontalScrollView
+     |      termuxgui.framelayout.FrameLayout
+     |      termuxgui.viewgroup.ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  selecttab(self, tab: int)
+     |      Selects a tab in the TabLayout. tab is the index of the tab to select, starting at 0.
+     |
+     |  setlist(self, list: List[str])
+     |      Sets the list tabs.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.horizontalscrollview.HorizontalScrollView:
+     |
+     |  getscrollposition(self) -> List[int]
+     |      Gets the x and x scroll positions.
+     |
+     |  setscrollposition(self, x: int, y: int, smooth: bool = True)
+     |      Sets the x and x scroll positions. smooth specifies whether is's a smooth scoll or not.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.viewgroup.ViewGroup:
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class Task(builtins.object)
+     |  Task(connection: termuxgui.connection.Connection, tid: int)
+     |
+     |  This represents an Android Task. It is automatically created with the Activity.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, connection: termuxgui.connection.Connection, tid: int)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  bringtofront(self)
+     |      Bring this Task to the front and make it visible to the user.
+     |      Might require "overlay over other apps" permission.
+     |
+     |  finish(self)
+     |      Finishes this Task.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+    class TextView(termuxgui.view.View)
+     |  TextView(activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, selectabletext: bool = False, clickablelinks: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a TextView.
+     |
+     |  Method resolution order:
+     |      TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, text: str, parent: Optional[termuxgui.view.View] = None, selectabletext: bool = False, clickablelinks: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class ToggleButton(termuxgui.compoundbutton.CompoundButton)
+     |  ToggleButton(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a ToggleButton.
+     |
+     |  Method resolution order:
+     |      ToggleButton
+     |      termuxgui.compoundbutton.CompoundButton
+     |      termuxgui.button.Button
+     |      termuxgui.textview.TextView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, checked: bool = False, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.compoundbutton.CompoundButton:
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Use this to let the CompoundButton track whether it is checked or not. Just pass every Event here.
+     |
+     |  setchecked(self, checked: bool)
+     |      Explicitly set the checked status of this CompoundButton.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.textview.TextView:
+     |
+     |  gettext(self) -> str
+     |      Gets the text of this TextView.
+     |
+     |  sendtextevent(self, send: bool)
+     |      Sets whether ot not text events are send for this TextView.
+     |
+     |  setgravity(self, horizontal: Literal[0, 1, 2], vertical: Literal[0, 1, 2])
+     |      Sets the text gravity for this TextView.
+     |      The values are: 0: left/top, 1: center, 2: right/bottom.
+     |      Right and left are inverted for right-to-left layouts.
+     |
+     |  settext(self, text: str)
+     |      Sets the text of this TextView.
+     |
+     |  settextcolor(self, color: int)
+     |      Sets the text color of this TextView. The color format is the same as for Activity.settheme().
+     |
+     |  settextsize(self, size: int)
+     |      Sets the text size for this TextView.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class View(builtins.object)
+     |  View(activity: termuxgui.activity.Activity, id: int)
+     |
+     |  This represents a generic View.
+     |
+     |  Methods defined here:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, id: int)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __annotations__ = {'MATCH_PARENT': <class 'str'>, 'WRAP_CONTENT': <cla...
+     |
+     |  __hash__ = None
+
+    class ViewGroup(termuxgui.view.View)
+     |  ViewGroup(activity: termuxgui.activity.Activity, id: int)
+     |
+     |  This represents a generic ViewGroup.
+     |
+     |  Method resolution order:
+     |      ViewGroup
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, id: int)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  clearchildren(self)
+     |      Removes all child Views of this ViewGroup.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+    class WebView(termuxgui.view.View)
+     |  WebView(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a WebView.
+     |
+     |  Method resolution order:
+     |      WebView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  allowcontenturi(self, allow: bool)
+     |      Sets whether it is allowed to load content from a content:// URI.
+     |
+     |  allowjavascript(self, allow: bool)
+     |      Sets whether Javascript execution is allowed in the WebView.
+     |      If requesting to allow, the user is prompted and can deny the request.
+     |      Blocks until the user responded.
+     |      Returns wheter Javascript is enabled after the call.
+     |
+     |  allownavigation(self, allow: bool)
+     |      Sets whether the user and Javascript are allowed to navigate to different sites.
+     |
+     |  evaluatejs(self, code: str)
+     |      Runs Javascript in the WebView, if Javascript is enabled.
+     |
+     |  goback(self)
+     |      Goes back in the history.
+     |
+     |  goforward(self)
+     |      Goes forward in the history.
+     |
+     |  loaduri(self, uri: str)
+     |      Loads a URI.
+     |
+     |  setdata(self, data: str)
+     |      Sets the document data.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+DATA
+    __all__ = ['Activity', 'Buffer', 'Button', 'Checkbox', 'CompoundButton...
+
+FILE
+    /data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/__init__.py
+
+

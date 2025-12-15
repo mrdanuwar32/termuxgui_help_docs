@@ -1,0 +1,4 @@
+No Python documentation found for "This is a library for interacting with the Termux:GUI plugin from python.\n\nYou don't need to include all the submodules, all needed classes are automatically included in the package scope upon\nimporting the package.".
+Use help() to get the interactive help utility.
+Use help(str) for help on the str class.
+

@@ -1,0 +1,125 @@
+Help on module termuxgui.event in termuxgui:
+
+NAME
+    termuxgui.event
+
+CLASSES
+    builtins.object
+        Event
+
+    class Event(builtins.object)
+     |  Event(ev: dict)
+     |
+     |  This represents an Event in the GUI.
+     |
+     |  The class variables are the available event types.
+     |
+     |  Use ev.type == Event.eventtype to check for event types.
+     |
+     |  ev.type contains the event type and ev.value is a dictionary containing the values of the event, if any.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, ev: dict)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  airplane = 'airplane'
+     |
+     |  back = 'back'
+     |
+     |  click = 'click'
+     |
+     |  config = 'config'
+     |
+     |  create = 'create'
+     |
+     |  destroy = 'destroy'
+     |
+     |  focusChange = 'focusChange'
+     |
+     |  itemselected = 'itemselected'
+     |
+     |  key = 'key'
+     |
+     |  locale = 'locale'
+     |
+     |  longClick = 'longClick'
+     |
+     |  notification = 'notification'
+     |
+     |  notificationDismissed = 'notificationDismissed'
+     |
+     |  notificationaction = 'notificationaction'
+     |
+     |  overlayScale = 'overlayScale'
+     |
+     |  overlaytouch = 'overlayTouch'
+     |
+     |  pause = 'pause'
+     |
+     |  pipchanged = 'pipchanged'
+     |
+     |  refresh = 'refresh'
+     |
+     |  remoteclick = 'remoteclick'
+     |
+     |  resume = 'resume'
+     |
+     |  screen_off = 'screen_off'
+     |
+     |  screenon = 'screen_on'
+     |
+     |  selected = 'selected'
+     |
+     |  start = 'start'
+     |
+     |  stop = 'stop'
+     |
+     |  text = 'text'
+     |
+     |  timezone = 'timezone'
+     |
+     |  touch = 'touch'
+     |
+     |  touch_cancel = 'cancel'
+     |
+     |  touch_down = 'down'
+     |
+     |  touch_move = 'move'
+     |
+     |  touch_pointer_down = 'pointer_down'
+     |
+     |  touch_pointer_up = 'pointer_up'
+     |
+     |  touch_up = 'up'
+     |
+     |  userleavehint = 'UserLeaveHint'
+     |
+     |  webviewConsoleMessage = 'webviewConsoleMessage'
+     |
+     |  webviewDestroyed = 'webviewDestroyed'
+     |
+     |  webviewError = 'webviewError'
+     |
+     |  webviewHTTPError = 'webviewHTTPError'
+     |
+     |  webviewNavigation = 'webviewNavigation'
+     |
+     |  webviewProgress = 'webviewProgress'
+
+FILE
+    /data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/event.py
+
+

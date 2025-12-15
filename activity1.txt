@@ -1,0 +1,116 @@
+Help on module termuxgui.activity in termuxgui:
+
+NAME
+    termuxgui.activity
+
+CLASSES
+    builtins.object
+        Activity
+
+    class Activity(builtins.object)
+     |  Activity(connection: termuxgui.connection.Connection, tid: Optional[str] = None, dialog: Optional[bool] = None, pip: Optional[bool] = False, overlay: Optional[bool] = None, lockscreen: Optional[bool] = None, canceloutside: bool = True, intercept: bool = False)
+     |
+     |  This represents an Android Activity.
+     |
+     |  Use a.c to access the Connection object of an Activity and a.t to access the Task object.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, connection: termuxgui.connection.Connection, tid: Optional[str] = None, dialog: Optional[bool] = None, pip: Optional[bool] = False, overlay: Optional[bool] = None, lockscreen: Optional[bool] = None, canceloutside: bool = True, intercept: bool = False)
+     |      When an Activity could not be created, a RuntimeError is raised.
+     |
+     |  finish(self)
+     |      Finishes an Activity.
+     |
+     |  getconfiguration(self) -> termuxgui.connection.Configuration
+     |      Reads the current configuration of this Activity.
+     |
+     |  hidesoftkeyboard(self)
+     |      Hides the soft keyboard if this Activity has the soft keyboard focus.
+     |
+     |  interceptbackbutton(self, intercept: bool)
+     |      Sets whether to intercept a back button press and send an event instead.
+     |
+     |  keepscreenon(self, on: bool)
+     |      Sets whether the Activity should keep the screen on while it is showing.
+     |
+     |  movetoback(self)
+     |      Moves this Activity's Task to the recents screen and hides it.
+     |
+     |  requestunlock(self)
+     |      Requests the lockscreen to unlock.
+     |      If the lockscreen is just protected by a swipe, it is unlocked immediately.
+     |      If a PIN, password or pattern has to be used, brings up the UI to let the user unlock the lockscreen.
+     |
+     |  sendoverlayevents(self, send: bool)
+     |      Sets whether or not you want to receive overlay events if the Activity is an overlay.
+     |
+     |  setinputmode(self, mode: Literal['resize', 'pan'])
+     |      Sets the input mode for an Activity.
+     |
+     |  setorientation(self, orientation: Literal['behind', 'fullSensor', 'fullUser', 'landscape', 'locked', 'nosensor', 'portrait', 'reverseLandscape', 'reversePortrait', 'sensorLandscape', 'sensorPortrait', 'user', 'userLandscape', 'userPortrait'])
+     |      Sets the preferred orientation of the Activity.
+     |
+     |  setpipmode(self, pip: bool)
+     |      Goes into / out of picture-in-picture mode.
+     |
+     |      When you exit pip, you Activity is put in the recent tasks list and not shown to the user.
+     |
+     |  setpipmodeauto(self, pip: bool)
+     |      Set whether the Activity should automatically enter picture-in-picture mode
+     |      when the user leaves the Activity.
+     |
+     |  setpipparams(self, num: int, den: int)
+     |      Sets the PiP parameters for the Activity, currently only the aspect ration.
+     |
+     |  setposition(self, x: int, y: int)
+     |      Sets the screen position of the Activity if it is an overlay.
+     |
+     |  setsecure(self, secure: bool)
+     |      Sets the secure flag for the Activity, making screenshots impossible and showing a blank screen in the
+     |      task switcher.
+     |
+     |  settaskdescription(self, label: str, img: str)
+     |      Sets the Task icon. img has to be a PNG or JPEG image as a base64 encoded string.
+     |
+     |  settheme(self, statusbarcolor: int, colorprimary: int, windowbackground: int, textcolor: int, coloraccent: int)
+     |      Sets the Theme for the Activity.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+DATA
+    Literal = typing.Literal
+        Special typing form to define literal types (a.k.a. value types).
+
+        This form can be used to indicate to type checkers that the corresponding
+        variable or function parameter has a value equivalent to the provided
+        literal (or one of several literals)::
+
+            def validate_simple(data: Any) -> Literal[True]:  # always returns True
+                ...
+
+            MODE = Literal['r', 'rb', 'w', 'wb']
+            def open_helper(file: str, mode: MODE) -> str:
+                ...
+
+            open_helper('/some/path', 'r')  # Passes type check
+            open_helper('/other/path', 'typo')  # Error in type checker
+
+        Literal[...] cannot be subclassed. At runtime, an arbitrary value
+        is allowed as type argument to Literal[...], but type checkers may
+        impose restrictions.
+
+    Optional = typing.Optional
+        Optional[X] is equivalent to Union[X, None].
+
+FILE
+    /data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/activity.py
+
+

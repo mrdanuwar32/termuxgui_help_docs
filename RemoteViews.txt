@@ -1,0 +1,89 @@
+Help on class RemoteViews in module termuxgui.remoteviews:
+
+class RemoteViews(builtins.object)
+ |  RemoteViews(connection: termuxgui.connection.Connection)
+ |
+ |  This represents a remote Layout. You can use remote Layouts for custom notifications or widgets.
+ |
+ |  Methods defined here:
+ |
+ |  __eq__(self, other)
+ |      Return self==value.
+ |
+ |  __init__(self, connection: termuxgui.connection.Connection)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  addButton(self, parent: Optional[int] = None) -> int
+ |      Creates a Button in this remote Layout and returns the id, or -1 if it could not be created.
+ |      The id can be used in further methods to manipulate the View.
+ |
+ |  addFrameLayout(self, parent: Optional[int] = None) -> int
+ |      Creates a FrameLayout in this remote Layout and returns the id, or -1 if it could not be created.
+ |      The id can be used in further methods to manipulate the View.
+ |
+ |  addImageView(self, parent: Optional[int] = None) -> int
+ |      Creates an ImageView in this remote Layout and returns the id, or -1 if it could not be created.
+ |      The id can be used in further methods to manipulate the View.
+ |
+ |  addLinearLayout(self, parent: Optional[int] = None, vertical: Optional[bool] = None) -> int
+ |      Creates a LinearLayout in this remote Layout and returns the id, or -1 if it could not be created.
+ |      The id can be used in further methods to manipulate the View.
+ |
+ |  addProgressBar(self, parent: Optional[int] = None) -> int
+ |      Creates a ProgressBar in this remote Layout and returns the id, or -1 if it could not be created.
+ |      The id can be used in further methods to manipulate the View.
+ |
+ |  addTextView(self, parent: Optional[int] = None) -> int
+ |      Creates a TextView in this remote Layout and returns the id, or -1 if it could not be created.
+ |      The id can be used in further methods to manipulate the View.
+ |
+ |  delete(self)
+ |      Deletes this remote Layout.
+ |
+ |  setBackgroundColor(self, id: int, color: int)
+ |      Sets the background color of a View in this remote Layout.
+ |
+ |  setImage(self, id: int, img: Union[str, bytes])
+ |      Sets the image of an ImageView in this remote Layout.
+ |      The image has to be a bytes object containing the image in png or jpeg format,
+ |      or a string containing the base64 encoded version of it.
+ |
+ |  setPadding(self, id: int, left: int, top: int, right: int, bottom: int)
+ |      Sets the padding of a View in this remote Layout.
+ |
+ |  setProgress(self, id: int, progress: int, max: int)
+ |      Sets the progress and maximum value of a ProgressBar in this remote Layout.
+ |
+ |  setText(self, id: int, text: str)
+ |      Sets the text of a TextView in this remote Layout.
+ |
+ |  setTextColor(self, id: int, color: int)
+ |      Sets the text color of a TextView in this remote Layout.
+ |
+ |  setTextSize(self, id: int, size: int, px: bool)
+ |      Sets the text size of a TextView in this remote Layout.
+ |      If px is true, the size will be in pixels. If not, it will be in dip.
+ |
+ |  setVisibility(self, id: int, vis: Literal[0, 1, 2])
+ |      Sets the visibility of a View in this remote Layout.
+ |
+ |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+ |      Gone views do not take up layout space.
+ |
+ |  updateWidget(self, wid: str)
+ |      Sets the content of the Widget with ID wid to this remote Layout.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __hash__ = None
+

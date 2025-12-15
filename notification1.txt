@@ -1,0 +1,112 @@
+Help on module termuxgui.notification in termuxgui:
+
+NAME
+    termuxgui.notification
+
+CLASSES
+    builtins.object
+        Notification
+
+    class Notification(builtins.object)
+     |  Notification(connection: termuxgui.connection.Connection, channel: str, importance: Literal[0, 1, 2, 3, 4])
+     |
+     |  This represents a notification.
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, connection: termuxgui.connection.Connection, channel: str, importance: Literal[0, 1, 2, 3, 4])
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  cancel(self)
+     |      Cancels the notification.
+     |
+     |  createchannel(self)
+     |      Creates the notification channel for the notification. This is called automatically when you call notify.
+     |
+     |  notify(self)
+     |      Creates/updates the notification.
+     |
+     |  setactions(self, actions: List[str])
+     |      Sets the displayed actions for the notification.
+     |
+     |  setalertonce(self, alertonce: bool)
+     |      If you call notify more than once, whether to alert the user every time.
+     |
+     |  setcontent(self, content: str)
+     |      Sets the content of the notification, removing any set custom layout.
+     |
+     |  setexpandedlayout(self, layout: termuxgui.remoteviews.RemoteViews)
+     |      Sets a custom expanded layout for the notification.
+     |      Removes any title, content largetext or largeimage.
+     |
+     |  sethudlayout(self, layout: termuxgui.remoteviews.RemoteViews)
+     |      Sets a custom hud layout for the notification.
+     |      Removes any title, content largetext or largeimage.
+     |
+     |  seticon(self, icon: bytes)
+     |      Set the icon of the notification.
+     |      icon has to be a bytes object containing the icon in png or jpeg format.
+     |
+     |  setlargeimage(self, img: bytes)
+     |      Sets a large image for the notification, removing any set custom layout.
+     |
+     |  setlargeimageasthumbnail(self, asthumbnail: bool)
+     |      Sets whether to show a large image as a thumbnail in the collapsed notification.
+     |
+     |  setlargetext(self, text: str)
+     |      Sets the text after expanding the notification, removing any set custom layout.
+     |
+     |  setlayout(self, layout: termuxgui.remoteviews.RemoteViews)
+     |      Sets a custom layout for the notification.
+     |      Removes any title, content largetext or largeimage.
+     |
+     |  setongoing(self, ongoing: bool)
+     |      Ongoing notifications can't be dismissed by the user.
+     |
+     |  setshowtimestamp(self, show: bool)
+     |      Whether the timestamp is shown in the notification
+     |
+     |  settimestamp(self, timestamp: int)
+     |      Sets the timestamp of the notification. The format is the unix time in milliseconds.
+     |
+     |  settitle(self, title: str)
+     |      Sets the title of the notification, removing any set custom layout.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+
+DATA
+    List = typing.List
+        A generic version of list.
+
+    Literal = typing.Literal
+        Special typing form to define literal types (a.k.a. value types).
+
+        This form can be used to indicate to type checkers that the corresponding
+        variable or function parameter has a value equivalent to the provided
+        literal (or one of several literals)::
+
+            def validate_simple(data: Any) -> Literal[True]:  # always returns True
+                ...
+
+            MODE = Literal['r', 'rb', 'w', 'wb']
+            def open_helper(file: str, mode: MODE) -> str:
+                ...
+
+            open_helper('/some/path', 'r')  # Passes type check
+            open_helper('/other/path', 'typo')  # Error in type checker
+
+        Literal[...] cannot be subclassed. At runtime, an arbitrary value
+        is allowed as type argument to Literal[...], but type checkers may
+        impose restrictions.
+
+FILE
+    /data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/notification.py
+
+

@@ -1,0 +1,33 @@
+Help on module termuxgui.msg in termuxgui:
+
+NAME
+    termuxgui.msg
+
+FUNCTIONS
+    read_msg(s: socket.socket) -> Any
+
+    read_msg_fd(s: socket.socket) -> Tuple[Any, Optional[int]]
+
+    send_msg(c: socket.socket, msg: str)
+
+    send_read_msg(s: socket.socket, msg: str) -> Any
+
+DATA
+    Optional = typing.Optional
+        Optional[X] is equivalent to Union[X, None].
+
+    Tuple = typing.Tuple
+        Deprecated alias to builtins.tuple.
+
+        Tuple[X, Y] is the cross-product type of X and Y.
+
+        Example: Tuple[T1, T2] is a tuple of two elements corresponding
+        to type variables T1 and T2.  Tuple[int, float, str] is a tuple
+        of an int, a float and a string.
+
+        To specify a variable-length tuple of homogeneous type, use Tuple[T, ...].
+
+FILE
+    /data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/msg.py
+
+

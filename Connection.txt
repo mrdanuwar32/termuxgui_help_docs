@@ -1,0 +1,63 @@
+Help on class Connection in module termuxgui.connection:
+
+class Connection(builtins.object)
+ |  This represents a connection to the Termux:GUI plugin and contains all functions that don't act on any
+ |  particular View, Activity or Task.
+ |
+ |  Methods defined here:
+ |
+ |  __enter__(self)
+ |
+ |  __exit__(self, type, value, traceback)
+ |
+ |  __init__(self)
+ |      When a connection can't be established, a RuntimeError is raised.
+ |
+ |  checkevent(self) -> Optional[termuxgui.event.Event]
+ |      If there is at least one event to be read, returns it.
+ |      If there is no event, returns None.
+ |      You can use this to e.g. check for events between drawing a frame instead of
+ |      having to use a separate thread and blocking it.
+ |
+ |  close(self)
+ |      Closes the connection.
+ |
+ |      The connection is automatically closed when the program exits, but it's good practice to close the connection
+ |      yourself when you don't need it anymore or use a "with" statement.
+ |
+ |  events(self) -> Iterator[termuxgui.event.Event]
+ |      Waits for events. Use this with "for in" to iterate over incoming events and block while waiting.
+ |
+ |  getversion(self) -> bool
+ |      Returns the version code of the plugin app.
+ |      Can be used to disable features only present in a newer version or prompting the user to update.
+ |
+ |  islocked(self) -> bool
+ |      Returns whether the device is locked.
+ |
+ |  send_msg(self, msg: Union[str, dict])
+ |      Send a message to the main socket.
+ |      You should only need to call this yourself if you want to use methods not yet implemented in the library.
+ |
+ |  send_read_msg(self, msg: Union[str, dict])
+ |      Send a message to the main socket and read a message afterwards.
+ |      You should only need to call this yourself if you want to use methods not yet implemented in the library.
+ |
+ |  toast(self, text: str, long: bool = False)
+ |      Sends a Toast. Set long to True if you want to display the text for longer.
+ |
+ |  totermux(self)
+ |      Returns to the termux task. This is a shorthand for running "am start" to start the termux activity.
+ |
+ |  turnscreenon(self)
+ |      Turns the screen on.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+

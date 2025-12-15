@@ -1,0 +1,177 @@
+Help on module termuxgui.webview in termuxgui:
+
+NAME
+    termuxgui.webview
+
+CLASSES
+    termuxgui.view.View(builtins.object)
+        WebView
+
+    class WebView(termuxgui.view.View)
+     |  WebView(activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |
+     |  This represents a WebView.
+     |
+     |  Method resolution order:
+     |      WebView
+     |      termuxgui.view.View
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, activity: termuxgui.activity.Activity, parent: Optional[termuxgui.view.View] = None, visibility: Optional[Literal[0, 1, 2]] = None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  allowcontenturi(self, allow: bool)
+     |      Sets whether it is allowed to load content from a content:// URI.
+     |
+     |  allowjavascript(self, allow: bool)
+     |      Sets whether Javascript execution is allowed in the WebView.
+     |      If requesting to allow, the user is prompted and can deny the request.
+     |      Blocks until the user responded.
+     |      Returns wheter Javascript is enabled after the call.
+     |
+     |  allownavigation(self, allow: bool)
+     |      Sets whether the user and Javascript are allowed to navigate to different sites.
+     |
+     |  evaluatejs(self, code: str)
+     |      Runs Javascript in the WebView, if Javascript is enabled.
+     |
+     |  goback(self)
+     |      Goes back in the history.
+     |
+     |  goforward(self)
+     |      Goes forward in the history.
+     |
+     |  loaduri(self, uri: str)
+     |      Loads a URI.
+     |
+     |  setdata(self, data: str)
+     |      Sets the document data.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __annotations__ = {}
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from termuxgui.view.View:
+     |
+     |  __eq__(self, other)
+     |      Return self==value.
+     |
+     |  delete(self)
+     |      Deletes this View from the layout.
+     |
+     |  focus(self, forcesoft: bool = False)
+     |      Sets the Focus to this View and opens the soft keyboard if the View has keyboard input.
+     |
+     |  getdimensions(self) -> List[int]
+     |      Gets the width and height of a View in the layout as a list. The values are in pixels.
+     |
+     |  handleevent(self, e: termuxgui.event.Event)
+     |      Handles an Event for this View. Subclasses can override this to provide event handling.
+     |
+     |  sendclickevent(self, send: bool)
+     |      Sets whether ot not click events are sent for this View.
+     |
+     |  sendfocuschangeevent(self, send: bool)
+     |      Sets whether ot not focus change events are sent for this View.
+     |
+     |  sendlongclickevent(self, send: bool)
+     |      Sets whether ot not long click events are sent for this View.
+     |
+     |  sendtouchevent(self, send: bool)
+     |      Sets whether ot not touch events are sent for this View.
+     |
+     |  setbackgroundcolor(self, color: int)
+     |      Sets the background color for this view.
+     |
+     |  setclickable(self, clickable: bool)
+     |      Sets whether the View is clickable by the user.
+     |
+     |  setdimensions(self, width: Union[int, str], height: Union[int, str], px: bool = False)
+     |      Sets the dimensions of this view. width and height are the same as for setwidth and setheight.
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setgridlayoutparams(self, row: int, col: int, rowsize: int = 1, colsize: int = 1, alignmentrow: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center', alignmentcol: Literal['top', 'bottom', 'left', 'right', 'center', 'baseline', 'fill'] = 'center')
+     |      Sets the GridLayout position for this View.
+     |      The rows and columns start at 0.
+     |      rowsize and colsize define how many row/column cells a View takes up.
+     |      alignmentrow and alignmentcol specify how the View is positioned in its cells,
+     |
+     |  setheight(self, height: Union[int, str], px: bool = False)
+     |      Sets the height of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  setlinearlayoutparams(self, weight: int, position: Optional[int] = None)
+     |      Sets the LinearLayout weight and/or position for this view.
+     |
+     |  setmargin(self, margin: int, dir: Optional[Literal['top', 'bottom', 'left', 'right']] = None)
+     |      Sets the margins of this View for one or all directions.
+     |
+     |  setvisibility(self, vis: Literal[0, 1, 2])
+     |      Sets the visibility for this view.
+     |
+     |      0 = gone, 1 = hidden, 2 = visible. While hidden, views are not visible but still take up space in the layout.
+     |      Gone views do not take up layout space.
+     |
+     |  setwidth(self, width: Union[int, str], px: bool = False)
+     |      Sets the width of this View.
+     |      Can be either an integer describing the value in dp, "MATCH_PARENT" or "WRAP_CONTENT".
+     |      If px is true, the values are in pixels instead.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from termuxgui.view.View:
+     |
+     |  __dict__
+     |      dictionary for instance variables
+     |
+     |  __weakref__
+     |      list of weak references to the object
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from termuxgui.view.View:
+     |
+     |  GONE = 0
+     |
+     |  HIDDEN = 1
+     |
+     |  MATCH_PARENT = 'MATCH_PARENT'
+     |
+     |  VISIBLE = 2
+     |
+     |  WRAP_CONTENT = 'WRAP_CONTENT'
+     |
+     |  __hash__ = None
+
+DATA
+    Literal = typing.Literal
+        Special typing form to define literal types (a.k.a. value types).
+
+        This form can be used to indicate to type checkers that the corresponding
+        variable or function parameter has a value equivalent to the provided
+        literal (or one of several literals)::
+
+            def validate_simple(data: Any) -> Literal[True]:  # always returns True
+                ...
+
+            MODE = Literal['r', 'rb', 'w', 'wb']
+            def open_helper(file: str, mode: MODE) -> str:
+                ...
+
+            open_helper('/some/path', 'r')  # Passes type check
+            open_helper('/other/path', 'typo')  # Error in type checker
+
+        Literal[...] cannot be subclassed. At runtime, an arbitrary value
+        is allowed as type argument to Literal[...], but type checkers may
+        impose restrictions.
+
+    Optional = typing.Optional
+        Optional[X] is equivalent to Union[X, None].
+
+FILE
+    /data/data/com.termux/files/usr/lib/python3.12/site-packages/termuxgui/webview.py
+
+

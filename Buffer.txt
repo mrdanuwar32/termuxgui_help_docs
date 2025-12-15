@@ -1,0 +1,40 @@
+Help on class Buffer in module termuxgui.buffer:
+
+class Buffer(builtins.object)
+ |  Buffer(connection, w: int, h: int, format: Literal['ARGB888'] = 'ARGB888')
+ |
+ |  This represents a raw ARGB888 image buffer.
+ |
+ |  This is only available on Android 8.1+.
+ |  Buffers consume much memory, so be sure to close any Buffer you don't need any more.
+ |  Preferably use "with" to get the memory object of the buffer so it is automatically closed.
+ |  The memory object is a shared memory object that can be used like a bytes object or a file object.
+ |  You can also directly access the memory object as b.mem.
+ |
+ |  A RuntimeError is raised when a Buffer can't be created.
+ |
+ |  Methods defined here:
+ |
+ |  __enter__(self)
+ |
+ |  __exit__(self, type, value, traceback)
+ |
+ |  __init__(self, connection, w: int, h: int, format: Literal['ARGB888'] = 'ARGB888')
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  blit(self)
+ |      Blits the buffer to the underlying image in the plugin.
+ |      To update ImageViews using this buffer, they have to be refreshed afterwards.
+ |
+ |  remove(self)
+ |      Removes this buffer, freeing the memory.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+
